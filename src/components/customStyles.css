@@ -1,0 +1,165 @@
+/* Custom styles for card flip effect */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.transform-style-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+/* Adjust section wrapper padding */
+.section-wrapper {
+  padding-top: 60px !important;
+  padding-bottom: 60px !important;
+}
+
+/* Remove extra spacing from vertical timeline */
+.vertical-timeline::before {
+  width: 2px !important;
+}
+
+.vertical-timeline-element {
+  margin: 2.5em 0 !important;
+}
+
+.vertical-timeline-element-content {
+  padding: 1.2em !important;
+}
+
+/* Reduce bottom margin of hero section */
+#about {
+  margin-top: -40px;
+}
+
+/* Adjust react-vertical-timeline-component spacing */
+.vertical-timeline-element-content-arrow {
+  border-right: 7px solid #1d1836 !important;
+}
+
+.vertical-timeline-element-icon {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-shadow: 0 0 0 4px #232631, inset 0 2px 0 rgba(0, 0, 0, 0.08), 0 3px 0 4px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Fix vertical timeline positioning */
+.vertical-timeline::before {
+  left: 50% !important;
+  margin-left: -1px !important;
+}
+
+/* Center the vertical timeline content */
+.vertical-timeline {
+  width: 100% !important;
+  max-width: 1170px !important;
+  margin: 0 auto !important;
+}
+
+/* Ensure the icons are centered in the timeline */
+.vertical-timeline--animate .vertical-timeline-element-icon.bounce-in {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Fix alignment for mobile */
+@media screen and (max-width: 1169px) {
+  .vertical-timeline.vertical-timeline--two-columns {
+    width: 90% !important;
+  }
+
+  .vertical-timeline::before {
+    left: 18px !important;
+  }
+}
+
+@media only screen and (max-width: 1169px) {
+  .vertical-timeline-element-icon {
+    margin-left: -15px !important;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .vertical-timeline-element-icon {
+    height: 35px !important;
+    width: 35px !important;
+    margin-left: -17px !important;
+  }
+}
+
+/* Ensure the timeline icon is properly centered */
+.vertical-timeline-element {
+  position: relative;
+}
+
+.vertical-timeline-element-content {
+  margin-left: 60px;
+}
+
+.vertical-timeline--two-columns .vertical-timeline-element-content {
+  margin-left: 0;
+}
+
+@media only screen and (min-width: 1170px) {
+  .vertical-timeline--two-columns .vertical-timeline-element-content {
+    margin-left: 0;
+  }
+  
+  .vertical-timeline--two-columns .vertical-timeline-element-content-arrow {
+    top: 24px;
+  }
+}
+
+/* Keep all text and content visible at all times */
+.card-container,
+.project-card,
+.green-pink-gradient,
+.tech-card,
+.section-heading,
+.sectionSubText,
+.sectionHeadText,
+p, h1, h2, h3,
+.tech-icons-wrapper,
+.max-w-3xl {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+}
+
+/* Prevent any element from disappearing when scrolling */
+.vertical-timeline-element,
+.text-secondary,
+.list-disc li,
+.leading-\[26px\] {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Ensure cards and elements remain fully visible at all times */
+.green-pink-gradient,
+.tech-card,
+.project-card,
+.works-container {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* Custom style for role cards */
+.xs\:w-\[210px\] {
+  will-change: transform, opacity;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Maintain visibility for elements in the viewport */
+[class*="in-viewport"] {
+  opacity: 1 !important;
+}

@@ -1,0 +1,25 @@
+/* Card rotation animation fix */
+.spin-y-on-hover {
+  transition: none !important;
+  transform-style: preserve-3d !important;
+  will-change: transform;
+}
+
+.spin-y-on-hover:hover {
+  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  transform: rotateY(360deg) !important;
+}
+
+/* Ensure animations don't get overridden */
+#about .green-pink-gradient,
+#about .card-container {
+  transition: none !important;
+}
+
+/* Fix for paragraph text animations */
+#about p, 
+#about li {
+  will-change: opacity, transform;
+  transition-property: opacity, transform;
+  transition-duration: 0.8s;
+}

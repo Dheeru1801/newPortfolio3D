@@ -1,0 +1,176 @@
+/* Introduction section specific animations */
+.introduction-heading {
+  position: relative;
+  overflow: hidden;
+  will-change: transform, opacity;
+  margin-bottom: 16px;
+}
+
+/* Special styling for the Overview heading */
+.overview-text {
+  font-style: italic;
+  font-family: 'Arial', cursive;
+  background: linear-gradient(to right, #804dee, #915eff, #a78bfa);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 2px 10px rgba(92, 56, 255, 0.15);
+  animation: glow 3s ease-in-out infinite alternate;
+  letter-spacing: -0.5px;
+  transition: transform 0.3s ease, text-shadow 0.3s ease;
+  cursor: default;
+}
+
+.overview-text:hover {
+  transform: translateY(-3px) scale(1.02);
+  text-shadow: 0 5px 15px rgba(112, 74, 255, 0.4), 0 2px 5px rgba(92, 56, 255, 0.3);
+}
+
+@keyframes glow {
+  0% {
+    text-shadow: 0 0 5px rgba(92, 56, 255, 0.1);
+  }
+  100% {
+    text-shadow: 0 0 15px rgba(92, 56, 255, 0.3), 0 0 30px rgba(92, 56, 255, 0.2);
+  }
+}
+
+/* Allow elements to animate when revisiting */
+#introduction h2, 
+#introduction p, 
+#introduction ul, 
+#introduction li {
+  transition: all 0.5s ease;
+  will-change: transform, opacity, filter;
+}
+
+/* Enhanced list item animations */
+#introduction li {
+  position: relative;
+  will-change: transform, opacity;
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+              opacity 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* When entering viewport animations */
+#introduction:not(.visible) li {
+  opacity: 0;
+  transform: translateX(-30px);
+}
+
+#introduction.visible li {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Set animation delays for list items */
+#introduction li:nth-child(1) { transition-delay: 0.1s; }
+#introduction li:nth-child(2) { transition-delay: 0.2s; }
+#introduction li:nth-child(3) { transition-delay: 0.3s; }
+
+/* Hover effect on list items */
+#introduction li:hover {
+  transform: translateX(5px);
+  color: #ffffff;
+}
+
+/* Add a subtle indicator before list items */
+#introduction li::before {
+  display: inline-block;
+  content: "";
+  position: relative;
+  top: -3px;
+  width: 6px;
+  height: 6px;
+  margin-right: 8px;
+  background: linear-gradient(90deg, #804dee, #e07be0);
+  border-radius: 50%;
+  opacity: 0.8;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+#introduction li:hover::before {
+  transform: scale(1.5);
+  opacity: 1;
+}
+
+/* Paragraph Container Styling */
+.paragraph-container {
+  position: relative;
+  margin-top: 1rem;
+  padding-left: 5px;
+  border-left: 0px solid transparent;
+  transition: all 0.5s ease;
+}
+
+.paragraph-container:hover {
+  border-left: 2px solid rgba(128, 77, 238, 0.3);
+  padding-left: 15px;
+}
+
+/* Enhanced paragraph animations */
+.paragraph-content {
+  position: relative;
+  will-change: transform, opacity;
+  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.5);
+  border-left: 3px solid transparent;
+  padding-left: 0;
+}
+
+/* Paragraph hover effects */
+.paragraph-content:hover {
+  transform: translateX(5px);
+  border-left: 3px solid rgba(128, 77, 238, 0.5);
+  padding-left: 10px;
+  color: #f0f0f0;
+}
+
+/* Special highlight for the last paragraph */
+.highlight-paragraph {
+  position: relative;
+  overflow: hidden;
+}
+
+.highlight-paragraph::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #915eff, #a78bfa);
+  transition: width 0.8s ease;
+}
+
+.highlight-paragraph:hover::after {
+  width: 100%;
+}
+
+/* Staggered animation for paragraphs when entering viewport */
+#introduction:not(.visible) .paragraph-content {
+  opacity: 0;
+  transform: translateX(-40px);
+}
+
+#introduction.visible .paragraph-content {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+#introduction .paragraph-content:nth-of-type(1) { transition-delay: 0.4s; }
+#introduction .paragraph-content:nth-of-type(2) { transition-delay: 0.6s; }
+
+/* Add subtle letter animation for paragraphs on hover */
+@keyframes letterSpacing {
+  0% { letter-spacing: 0; }
+  100% { letter-spacing: 0.2px; }
+}
+
+.paragraph-content:hover {
+  animation: letterSpacing 0.5s forwards;
+}
+
+/* Ensure motion styled elements have proper transitions */
+#introduction [data-motion] {
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}

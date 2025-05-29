@@ -1,0 +1,90 @@
+/* Project card fade-in animation */
+@keyframes fadeInBrightness {
+  from {
+    opacity: 0;
+    filter: brightness(0.5);
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    filter: brightness(1);
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Apply animation to project cards when they appear */
+.project-card {
+  animation: fadeInBrightness 0.8s ease-out forwards;
+  will-change: opacity, filter, transform;
+  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
+              filter 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
+              transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  z-index: 1;
+}
+
+/* Gradual fade levels based on visibility percentage */
+
+/* Strong fade (0-20% visible) */
+.project-card.fade-out-strong {
+  opacity: 0.2 !important;
+  filter: brightness(0.5) grayscale(0.6) blur(1.5px) !important;
+  transform: scale(0.95) !important;
+  z-index: 0 !important;
+}
+
+/* Medium fade (20-40% visible) */
+.project-card.fade-out-medium {
+  opacity: 0.4 !important;
+  filter: brightness(0.65) grayscale(0.4) blur(0.8px) !important;
+  transform: scale(0.97) !important;
+  z-index: 0 !important;
+}
+
+/* Light fade (40-70% visible) */
+.project-card.fade-out-light {
+  opacity: 0.7 !important;
+  filter: brightness(0.8) grayscale(0.2) blur(0.3px) !important;
+  transform: scale(0.98) !important;
+  z-index: 0 !important;
+}
+
+/* Full visibility (70-100% visible) */
+.project-card.fade-in-full {
+  opacity: 1 !important;
+  filter: brightness(1) grayscale(0) blur(0) !important;
+  transform: scale(1) !important;
+  z-index: 1 !important;
+}
+
+/* Enhanced hover behavior for cards that are in focus (not faded out) */
+.project-card:not(.fade-out):hover .card-container {
+  transform: translateY(-15px) scale(1.03);
+  filter: brightness(1.1) drop-shadow(0 15px 15px rgba(0, 0, 0, 0.3));
+  z-index: 10;
+}
+
+/* Ensure the project cards have proper dimensions */
+.project-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 450px;
+}
+
+/* Ensure project card titles have uniform height */
+.card-front h3 {
+  height: 3em;
+  display: flex;
+  align-items: center;
+}
+
+/* Improve image transitions */
+.card-front img {
+  transition: transform 0.5s ease, filter 0.5s ease;
+  filter: brightness(0.9);
+}
+
+.card-container:hover .card-front img {
+  filter: brightness(1.1);
+}
