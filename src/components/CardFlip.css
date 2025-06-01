@@ -1,0 +1,84 @@
+/* Card flip specific styles */
+.card-container {
+  -webkit-perspective: 1500px;
+  perspective: 1500px;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+
+.card-inner {
+  position: relative;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  transition: -webkit-transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275), -webkit-transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.card-flipped .card-inner {
+  -webkit-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+
+.card-back {
+  -webkit-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+}
+
+/* Enhanced visibility for card content */
+.card-front > *,
+.card-back > * {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* Fix for card back content */
+.card-back p, 
+.card-back h3, 
+.card-back button, 
+.card-back div {
+  -webkit-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+}
+
+/* Fix double rotation to make text readable */
+.card-flipped .card-back p, 
+.card-flipped .card-back h3, 
+.card-flipped .card-back button, 
+.card-flipped .card-back div {
+  -webkit-transform: rotateY(0deg);
+  transform: rotateY(0deg);
+}
+
+/* Add glow effect for flipped cards */
+.card-flipped .card-inner {
+  box-shadow: 0 0 25px rgba(145, 94, 255, 0.5);
+}
+
+/* Add overlay to ensure proper visibility of front/back */
+.card-front::after,
+.card-back::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: transparent;
+  z-index: -1;
+}
+
+.card-flipped .card-front::after {
+  background-color: rgba(0,0,0,0.5);
+}

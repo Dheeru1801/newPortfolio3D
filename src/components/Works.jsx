@@ -11,6 +11,8 @@ import { projects } from "../constants";
 import { initCardVisibility } from "../utils/cardVisibility";
 import './CardStyles.css';
 import './ProjectCardAnimations.css';
+import './CardFlip.css';
+import './CardFixExtra.css';
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
@@ -25,6 +27,14 @@ const ProjectCard = ({
 }) => {
   const cardRef = useRef(null);
   const [isFlipped, setIsFlipped] = useState(false);
+  
+  // Handle keyboard interaction for accessibility
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      setIsFlipped(!isFlipped);
+    }
+  };
   
   useEffect(() => {
     const el = cardRef.current;
@@ -57,15 +67,26 @@ const ProjectCard = ({
       }
     );
   }, []);
-
   const handleFlip = (e) => {
     e.stopPropagation();
     setIsFlipped(!isFlipped);
-  };  return (
+  };
+  
+  const handleCardClick = (e) => {
+    // For better UX, only flip the card when clicking directly on it
+    // Other clickable elements have stopPropagation to prevent this
+  };
+  
+  return (
     <div 
       ref={cardRef} 
       className={`card-container ${isFlipped ? 'card-flipped' : ''}`}
       style={{ width: "100%", maxWidth: "340px", height: "450px" }}
+      onClick={handleCardClick}
+      role="button"
+      tabIndex={0}
+      onKeyDown={handleKeyPress}
+      aria-label={`Project: ${name}. Press Enter to flip card for details`}
     >
       <div className="card-inner card-hover-effect">
         {/* Front of Card */}
@@ -96,27 +117,25 @@ const ProjectCard = ({
             </div>
             <div className="mt-4 flex justify-between items-start">
               <h3 className="text-white font-bold text-[18px] break-words mr-3" style={{ maxWidth: "calc(100% - 40px)" }}>{name}</h3>
-              
-              <div 
+                <div 
                 onClick={handleFlip}
-                className="info-button black-gradient shrink-0"
+                className="info-button black-gradient shrink-0 z-10"
+                aria-label="Project Details"
+                title="Click for project details"
               >
                 <div className="text-white text-lg font-bold">i</div>
               </div>
             </div>
           </div>
-        </div>
-
-        {/* Back of Card */}
+        </div>        {/* Back of Card */}
         <div className="card-back">
-          <div className="bg-tertiary p-4 rounded-2xl w-full h-full flex flex-col justify-between">
-            <div>
+          <div className="bg-tertiary p-4 rounded-2xl w-full h-full flex flex-col justify-between card-back-gradient">
+            <div className="card-back-content">
               <h3 className="text-white font-bold text-[20px] mb-3">{name}</h3>
-              <div className="overflow-y-auto h-[170px] pr-2">
-                <p className="text-secondary text-[13px]">{description}</p>
+              <div className="overflow-y-auto h-[200px] pr-2 custom-scrollbar">
+                <p className="text-secondary text-[14px] leading-[1.4]">{description}</p>
               </div>
-            </div>
-              <div className="mt-3">
+            </div>              <div className="mt-3 card-back-content">
                 <div className="flex flex-wrap gap-2 mb-3">
                 {tags.map((tag) => (
                   <p
@@ -125,15 +144,15 @@ const ProjectCard = ({
                   >
                     #{tag.name}
                   </p>
-                ))}
+                ))}              </div>              <div className="flex justify-center mt-4">
+                <button
+                  onClick={handleFlip}
+                  className="border border-secondary py-2 px-4 rounded-full text-white transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20 hover:scale-[1.02] font-medium card-back-content text-xs flex items-center gap-1"
+                  aria-label="Go back to project front"
+                >
+                  <span className="mr-1">←</span> Back to Project
+                </button>
               </div>
-              
-              <button
-                onClick={handleFlip}
-                className="border border-secondary py-1.5 px-3 rounded-lg text-white hover:bg-secondary/30 transition-all duration-300 w-full hover:shadow-lg hover:shadow-purple-500/20 hover:scale-[1.02]"
-              >
-                Back to Project
-              </button>
             </div>
           </div>
         </div>
